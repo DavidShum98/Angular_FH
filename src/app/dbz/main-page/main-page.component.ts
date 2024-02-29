@@ -14,28 +14,30 @@ import { Personaje } from '../interfaces/dbz.interface';
 })
 export class MainPageComponent {
 
-  personajes: Personaje[] = [
-    {
-      nombre: "Naruto",
-      poder: 1500
-    },
-  {
-    nombre: "Sasuke",
-    poder: 1450
-  },
-  {
-    nombre: "Krillen",
-    poder: 700
-  },
-  {
-    nombre: "Goku",
-    poder: 15000
-  },
-  {
-    nombre: "Vegeta",
-    poder: 8500
-  }
-  ];
+  // personajes: Personaje[] = [
+  //   {
+  //     nombre: "Naruto",
+  //     poder: 1500
+  //   },
+  // {
+  //   nombre: "Sasuke",
+  //   poder: 1450
+  // },
+  // {
+  //   nombre: "Krillen",
+  //   poder: 700
+  // },
+  // {
+  //   nombre: "Goku",
+  //   poder: 15000
+  // },
+  // {
+  //   nombre: "Vegeta",
+  //   poder: 8500
+  // }
+  // ];
+
+  // personajes: Personaje[] = [];
 
   nuevo: Personaje = {
     nombre: "",
@@ -44,15 +46,23 @@ export class MainPageComponent {
 
   agregar(){
     if(this.nuevo.nombre.trim().length === 0){ return; }
-    console.log(this.nuevo);
+    // console.log(this.nuevo);
 
-    this.personajes.push(this.nuevo);
+    this.dbzService.agregarPersonaje(this.nuevo);
+
     this.nuevo = {
       nombre: "",
       poder: 0
     }
   }
 
-  constructor(private DbzService: DbzService){}
+
+  get personajes(){
+    return this.dbzService.personajes;
+  }
+
+  constructor(private dbzService: DbzService){
+    // this.personajes = this.DbzService.personajes;
+  }
 
 }
